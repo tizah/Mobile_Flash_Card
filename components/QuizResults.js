@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, MaterialCommunityIcons  } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { clearLocalNotification, setLocalNotification } from '../utils/api';
 
@@ -58,7 +57,7 @@ function QuizResults(props) {
             </View>
 
             <View style={{ alignItems: 'center' }}>
-                <View style={[styles.card, styles.porcentage]}>
+                <View style={[styles.card, styles.percentage]}>
                     <Text style={styles.title}>
                         {Math.round(
                             (numberOfCorrectAnswers * 100) /
@@ -93,7 +92,7 @@ function QuizResults(props) {
                         Restart Quiz
                     </Text>
                     <MaterialCommunityIcons
-                        name="restore"
+                        name="restart"
                         size={40}
                         color="#1D3557"
                     />
@@ -113,11 +112,7 @@ function QuizResults(props) {
                     >
                         Back to Deck
                     </Text>
-                    <MaterialIcons
-                        name="exit-to-app"
-                        size={40}
-                        color="#1D3557"
-                    />
+                    <Ionicons name="return-down-back-outline" size={40} color="black" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -148,18 +143,17 @@ const styles = StyleSheet.create({
         marginVertical: 15,
     },
     number: {
-        backgroundColor: '#A8DADC',
         width: 50,
         height: 50,
-        borderRadius: 25,
+        borderRadius: 5,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    porcentage: {
+    percentage: {
         width: 100,
         height: 100,
-        borderRadius: 50,
+        borderRadius: 5,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -170,7 +164,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
+        borderRadius: 5,
     },
 });
 

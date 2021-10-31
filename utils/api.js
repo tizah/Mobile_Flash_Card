@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
 
 const NOTIFICATION_KEY = 'Flashcard:notifications';
 
@@ -31,29 +32,22 @@ export function setLocalNotification() {
         .then((data) => {
             if (data === null) {
                 Notifications.requestPermissionsAsync().then(({ granted }) => {
-                    if (granted) {
-                        Notifications.cancelAllScheduledNotificationsAsync().then(
-                            () => {
-                                let tommorow = new Date();
-                                tommorow.setDate(tommorow.getDate() + 1);
-                                tommorow.setHours(20);
-                                tommorow.setMinutes(0);
-                                Notifications.scheduleNotificationAsync({
-                                    content: createNotification(),
-                                    trigger: {
-                                        time: tommorow,
-                                        repeat: 'day',
-                                    },
-                                }).then(() => {
-                                    AsyncStorage.setItem(
-                                        NOTIFICATION_KEY,
-                                        JSON.stringify(true)
-                                    );
-                                });
-                            }
-                        );
-                    }
+                    if (granted === "granted") {
+                        Notifications.cancelAllScheduledNotificationsAsync();
+            
+                        let tomorrow = new Date();
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        tomorrow.setHours(9);
+                        tomorrow.setMinutes(0);
+            
+                        Notifications.scheduleLocalNotificationAsync(createNotification(), {
+                          time: tomorrow,
+                          repeat: "day"
+                        });
+            
+                        AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+                      }
                 });
             }
-        });
+        })
 }

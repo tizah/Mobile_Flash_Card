@@ -11,10 +11,6 @@ import Constants from 'expo-constants';
 import Deck from './components/Deck';
 import QuizResults from './components/QuizResults';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-    useFonts,
-    Play_400Regular,
-} from '@expo-google-fonts/play';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import decks from './reducers';
